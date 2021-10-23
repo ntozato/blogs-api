@@ -12,7 +12,7 @@ const create = async (req, res) => {
   const createUser = await service.create(displayName, email, password, image);
 
   if (createUser.message) {
-    return res.status(400).json({ message: createUser.message });
+    return res.status(createUser.status || 400).json({ message: createUser.message });
   }
 
   const userData = {
