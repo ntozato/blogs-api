@@ -34,6 +34,20 @@ const validateEmail = (email) => {
   return true;
 };
 
+const validateEmailLogin = (email) => {
+  if (email === '') return { message: '"email" is not allowed to be empty', status: 400 };
+  if (!email) return { message: '"email" is required', status: 400 };
+
+  return true;
+};
+
+const validatePasswordLogin = (password) => {
+  if (password === '') return { message: '"password" is not allowed to be empty', status: 400 };
+  if (!password) return { message: '"password" is required', status: 400 };
+  
+  return true;
+};
+
 const create = async (displayName, email, password, image) => {
   if (displayName.length < 8) {
     return { message: '"displayName" length must be at least 8 characters long' };
@@ -52,6 +66,23 @@ const create = async (displayName, email, password, image) => {
   return User.create({ displayName, email, password, image });
 };
 
+const validateLogin = async (email, password) => {
+  const isEmailValid = await validateEmailLogin(email);
+  const isPasswordValid = await validatePasswordLogin(password);
+
+  if (isEmailValid !== true) return isEmailValid;
+  if (isPasswordValid !== true) return isPasswordValid;
+  
+  const user = await User.findOne({ where: { email } });
+  
+  if (!user) {
+    return { message: 'Invalid fields', status: 400 };
+  }
+
+  return true;  
+};
+
 module.exports = {
   create,
+  validateLogin,
 };
