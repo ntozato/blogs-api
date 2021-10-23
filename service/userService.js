@@ -82,7 +82,13 @@ const validateLogin = async (email, password) => {
   return true;  
 };
 
+const getAll = async () => {
+  const users = await User.findAll();
+  return users;
+};
+
 module.exports = {
   create,
   validateLogin,
+  getAll,
 };

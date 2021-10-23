@@ -43,7 +43,17 @@ const login = async (req, res) => {
   return res.status(200).json({ token: userToken });
 };
 
+const getAll = async (req, res) => {
+  try {
+    const users = await service.getAll();
+    return res.status(200).json(users);
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
 module.exports = {
   create,
   login,
+  getAll,
 };
