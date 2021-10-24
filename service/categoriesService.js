@@ -9,6 +9,12 @@ const create = async (name) => {
   return createCategory;
 };
 
+const getAll = async () => {
+  const categories = await Category.findAll();
+  return categories;
+};
+
 module.exports = {
   create,
+  getAll,
 };
