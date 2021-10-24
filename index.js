@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const userController = require('./controllers/userController');
 const validateJWT = require('./auth/validateJWT');
 const categoriesController = require('./controllers/categoriesController');
+const blogPostController = require('./controllers/blogPostController');
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.get('/categories', validateJWT, categoriesController.getAll);
 app.post('/user', userController.create);
 app.post('/categories', validateJWT, categoriesController.create);
 app.post('/login', userController.login);
+app.post('/post', validateJWT, blogPostController.create);
 
 app.listen(3000, () => console.log('ouvindo porta 3000!'));
 
