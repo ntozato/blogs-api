@@ -15,9 +15,19 @@ const create = async (req, res) => {
 const getAll = async (_req, res) => {
   const listAll = await service.getAll();
   return res.status(200).json(listAll);
-}; 
+};
+
+const getById = async (req, res) => {
+  const { id } = req.params;
+  const post = await service.getById(id);
+  if (post.message) {
+    return res.status(404).json({ message: post.message });
+  }
+  return res.status(200).json(post);
+};
 
 module.exports = {
   create,
   getAll,
+  getById,
 };
