@@ -29,3 +29,4 @@ Nesse projeto, foi desenvolvida uma API de um CRUD posts de blog com o Sequelize
     - JWT_SECRET          // Sua escolha
     
 **Após feitas as configurações acima, inicie o projeto com npm start no terminal**
+
